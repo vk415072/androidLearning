@@ -35,8 +35,11 @@ public class MainActivity extends AppCompatActivity {
 
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
         listView = (ListView) findViewById(R.id.listView);
-        seekBar.setMax(20);
-        seekBar.setMin(2);
+        int max = 20;
+        int min = 2;
+        seekBar.setMax(max);
+        seekBar.setMin(min);
+        generateTable(min);
         seekBar.setProgress(2);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
