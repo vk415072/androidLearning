@@ -2,5 +2,6 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/give_you_glory</item>
+        <item>@font/yatra_one</item>
     </array>
 </resources>
