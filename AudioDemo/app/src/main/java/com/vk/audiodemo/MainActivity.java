@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                   //to actually seek the audio to the progress.
-               // mPlayer.seekTo(progress);
+               //2 mPlayer.seekTo(progress);
             }
 
             @Override
