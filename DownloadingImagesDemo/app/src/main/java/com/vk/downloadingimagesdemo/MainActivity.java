@@ -20,11 +20,11 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
 
-    //AsyncTask provides the functionality to run the code in a different threat to the main thread.
-    //it takes 3 variables:
-    //1.String = the type of variable that we're gong to send to this class (DownloadTask), here we're sending the URL.
-    //2.Void = is the name of the method that we may or may not use to show the progress of the task but we're not using suc method so we used void.
-    //3.Bitmap = this third variable type is the return type by the DownloadTask i.e, an image so bitmap is used.
+        //AsyncTask provides the functionality to run the code in a different threat to the main thread.
+        //it takes 3 variables:
+        //1.String = the type of variable that we're gong to send to this class (DownloadTask), here we're sending the URL.
+        //2.Void = is the name of the method that we may or may not use to show the progress of the task but we're not using suc method so we used void.
+        //3.Bitmap = this third variable type is the return type by the DownloadTask i.e, an image so bitmap is used.
     public class ImageDownloader extends AsyncTask<String, Void, Bitmap>{
 
         @Override
