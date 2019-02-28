@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
             Matcher matcher = pattern.matcher(strings[0]);
             while (matcher.find()){
                     //to print the celebrities' image links.
-                //System.out.println(matcher.group(1));
+                System.out.println(matcher.group(1));
                     //adding the image URL to the celebURLs array.
                 celebURLs.add(matcher.group(1));
             }
