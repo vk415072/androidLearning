@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Could not find weather", Toast.LENGTH_LONG).show();
         }
 
-
             //to close the keyboard as soon as the button is pressed:
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             //0 is here to specify that we are not specifying more parameters as this requires more then 2 parameters.
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     String description = jsonObjectPart.getString("description");
                     if(main != "" && description != ""){
                             //combining both strings to one.
-                        message = "Weather: " +main+ "\r\nDescription: "+description;
+                        message = "Weather: " +main+ "\r\n \r\nDescription: "+description;
                     }
                 }
                 if(message != ""){

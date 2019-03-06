@@ -23,7 +23,6 @@
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="32dp"
-        android:background="?attr/actionMenuTextColor"
         android:fontFamily="@font/aldrich"
         android:text="TextView"
         android:textAlignment="textStart"
@@ -32,7 +31,6 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
