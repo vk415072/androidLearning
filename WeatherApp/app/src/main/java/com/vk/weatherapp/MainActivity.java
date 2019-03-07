@@ -85,23 +85,40 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             String message = "";
+            String message1 = "";
             try {
                 JSONObject jsonObject = new JSONObject(s);
-                String extractedResult = jsonObject.getString("weather");
-                Log.i("City",extractedResult);
-                JSONArray jsonArray = new JSONArray(extractedResult);
-                for(int i=0; i<jsonArray.length(); i++){
-                    JSONObject jsonObjectPart = jsonArray.getJSONObject(i);
 
+                    //working for weather: weather, description etc.
+                String extractedWeather = jsonObject.getString("weather");
+                JSONArray jsonWeatherArray = new JSONArray(extractedWeather);
+                for(int i=0; i<jsonWeatherArray.length(); i++){
+                    JSONObject jsonObjectPart = jsonWeatherArray.getJSONObject(i);
+                    //setting texts...
                     String main = jsonObjectPart.getString("main");
                     String description = jsonObjectPart.getString("description");
                     if(main != "" && description != ""){
-                            //combining both strings to one.
-                        message = "Weather: " +main+ "\r\n \r\nDescription: "+description;
+                        //combining both strings to one.
+                        message = "Weather: " +main+ "\r\n(" +description+ ")";
                     }
                 }
-                if(message != ""){
-                    textView.setText(message);
+
+                    //working to add main: temp, pressure, humidity etc.
+                String extractedMain = jsonObject.getString("main");
+                JSONObject jsonMainObject = new JSONObject(extractedMain);
+                String pressure = jsonMainObject.getString("pressure");
+                String temp = jsonMainObject.getString("temp");
+                String humidity = jsonMainObject.getString("humidity");
+                String tempMin = jsonMainObject.getString("temp_min");
+                String tempMax = jsonMainObject.getString("temp_max");
+                if(temp != "" && pressure != "" && humidity != "" && tempMax != "" && tempMin != ""){
+                    //combining all strings to one.
+                    message1 = "\r\nTemp: " +temp+ " °C" + "\r\nPressure: " +pressure+ " hpa" + "\r\nHumidity: " +humidity+ " %" + "\r\nTemp Min: "  +tempMin+ " °C" + "\r\nTemp Max: " +tempMax+ " °C";
+                }
+
+                if(message != "" && message1 != ""){
+                    String message2 = message+message1;
+                    textView.setText(message2);
                     textView.setVisibility(View.VISIBLE);
                 }else {
                     Toast.makeText(getApplicationContext(), "Could not find weather", Toast.LENGTH_LONG).show();
