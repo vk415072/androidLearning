@@ -72,7 +72,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(final GoogleMap googleMap) {
 
         //GETTING USER'S LOCATION.
-        //accessing the location services of the phone.
+            //accessing the location services of the phone.
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
@@ -85,23 +85,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     //here we are passing the location, converting it to latitude & longitude.
                 LatLng usersLatLang = new LatLng(location.getLatitude(), location.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(usersLatLang).title("My Location"));
-                    //moving the camera to the user's location, also zooming to 15.
+                    //moving the camera to the user's location, also zooming to 16.
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(usersLatLang,16));
             }
 
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
-
             }
 
             @Override
             public void onProviderEnabled(String provider) {
-
             }
 
             @Override
             public void onProviderDisabled(String provider) {
-
             }
         };
             //in modern android we need to ask the user for the specific permission (Location Services in our case).
@@ -114,8 +111,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //if we already has permission then onRequestPermissionsResult() would not execute which contains the location requesting command so,
             //we've to implement an else statement too.
         }else{
+                //requesting location updates.
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-
                 //when we launch the app, it does not show any marker until we change the position or
                 //the marker will only pins whenever we change the location.
                 //to deal with this we are appointing a marker to the user's last known location.
