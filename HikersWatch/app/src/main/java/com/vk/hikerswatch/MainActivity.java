@@ -19,6 +19,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -54,17 +55,36 @@ public class MainActivity extends AppCompatActivity {
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
+                    //logging location data.
                 //Log.i("Location Data", location.toString());
-                    //getting the required data.
-                String latitude = new String(String.valueOf(location.getLatitude()));
-                String longitude = new String(String.valueOf(location.getLongitude()));
-                String altitude = new String (String.valueOf(location.getAltitude()));
+
+                //getting the required data.
+                    //Trimming data to two decimal places using DecimalFormat.
+                        //setting the decimal format.
+                DecimalFormat decimalFormat = new DecimalFormat("#.##");
+
+                    //storing data as a Double and float
+                Double lat = location.getLatitude();
+                Double lng = location.getLongitude();
+                Double alt = location.getAltitude();
+                float spd = (float) (location.getSpeed()*1.852);
+                    //performing trimming and storing as a String.
+                String latitude = new String(String.valueOf(decimalFormat.format(lat)));
+                String longitude = new String(String.valueOf(decimalFormat.format(lng)));
+                String altitude = new String (String.valueOf(decimalFormat.format(alt)));
+                    //multiplying the speed with 1.852 to convert it into Km/h as it is by default set to knots.
+                String speed = new String(String.valueOf(decimalFormat.format(spd)));
+                    //or we could directly use this method:
+                //String latitude = new String(String.valueOf(location.getLatitude()));
+                //String longitude = new String(String.valueOf(location.getLongitude()));
+                //String altitude = new String (String.valueOf(location.getAltitude()));
+                //String speed = new String(String.valueOf(location.getSpeed()*1.852));
                 String accuracy = new String(String.valueOf(location.getAccuracy()));
-                String speed = new String(String.valueOf(location.getSpeed()*1.852));
+
                     //setting the texts...
                 textView.setText("Latitude: "+latitude+"\nLongitude: "+longitude+"\nAltitude: "+altitude+" meters"+"\nAccuracy: "+accuracy+"\nSpeed: "+speed+" Km/h");
 
-                //FOR ADDRESS FIELD,we'll use revere geo coding.
+                //FOR ADDRESS FIELD, we'll use revere geo coding.
                         //Geo coding is the process of going from an address to a pair of coordinates. But we're going the other way so we'll use reverse geo coding.
                 Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
                     //creating a list of addresses.
