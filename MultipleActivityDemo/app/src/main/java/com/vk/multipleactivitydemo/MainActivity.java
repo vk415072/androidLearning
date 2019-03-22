@@ -8,11 +8,18 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
 
     public void tapToGo(View view){
-            //Intent generally changes the target of our code.
-                //used to jump to a certain activity or even a certain app.
+        //Intent generally changes the target of our code.
+        //used to jump to a certain activity or even a certain app.
         Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
-            //starting the intent.
+
+        // intents can be useful to pass some info to another activity
+        // first name of intent and then the value.
+        intent.putExtra("age", 28);
+
+        //actually starting the intent.
         startActivity(intent);
+
+
     }
 
     @Override

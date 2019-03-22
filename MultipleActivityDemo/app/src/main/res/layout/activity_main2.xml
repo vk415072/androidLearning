@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:onClick="tapToBack"
         android:text="Jump back to Main"
-        tools:layout_editor_absoluteX="161dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="341dp" />
 </android.support.constraint.ConstraintLayout>
