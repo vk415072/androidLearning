@@ -80,6 +80,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+
+    //STARTS HERE...
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -142,7 +145,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             List<Address> addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
             if(addressList != null && addressList.size() >0){
                 /*
-                //
                 if(addressList.get(0).getThoroughfare() != null){
                     if(addressList.get(0).getSubThoroughfare() != null){
                         address += addressList.get(0).getSubThoroughfare() + "";
@@ -161,10 +163,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
         //adding new marker to the long pressed location, setting the title to the address.
-        //latLang contains the co-ordinated received by the onMapLongClick() method.
+        //latLang of this method contains the co-ordinated received by the onMapLongClick() method.
         mMap.addMarker(new MarkerOptions().position(latLng).title(address));
 
-        //accessing the MainActivity to update the places & locations ArrayList's.
+        //accessing the MainActivity to update the places & locations in ArrayList's.
         MainActivity.places.add(address);
         MainActivity.locations.add(latLng);
         MainActivity.arrayAdapter.notifyDataSetChanged();
