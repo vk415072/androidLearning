@@ -124,9 +124,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
                 //after the permission is granted or denied by the user, onRequestPermissionResult method will be called.
             }
-            //'else' method will execute only if user long press on map.(check onMapLongClick() method).
-            //else
         }else{
+            //'else' method will execute only if user long press on map.(check onMapLongClick() method).
             Location placeLocation = new Location(LocationManager.GPS_PROVIDER);
             placeLocation.setLatitude(MainActivity.locations.get(intent.getIntExtra("placeNumber",0)).latitude);
             placeLocation.setLongitude(MainActivity.locations.get(intent.getIntExtra("placeNumber",0)).longitude);
