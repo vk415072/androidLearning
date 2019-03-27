@@ -3,6 +3,7 @@ package com.vk.memorableplacesapp;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -26,13 +27,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
-    //STARTING FROM onMapReady() METHOD...
+    //STARTING FROM onMapReady()...
 
     private GoogleMap mMap;
     LocationManager locationManager;
@@ -143,14 +145,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //using geo coder to get location data from location variable. The 1 in the end tells that how much addresses we want to be stored in the list
             List<Address> addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
             if(addressList != null && addressList.size() >0){
-                /*
-                if(addressList.get(0).getThoroughfare() != null){
-                    if(addressList.get(0).getSubThoroughfare() != null){
-                        address += addressList.get(0).getSubThoroughfare() + "";
-                    }
-                    address += addressList.get(0).getThoroughfare();
-                }
-                */
+
+//                if(addressList.get(0).getThoroughfare() != null){
+//                    if(addressList.get(0).getSubThoroughfare() != null){
+//                        address += addressList.get(0).getSubThoroughfare() + "";
+//                    }
+//                    address += addressList.get(0).getThoroughfare();
+//                }
+
                 address += addressList.get(0).getAddressLine(0);
             }
             //else if address line is null then set the date and time to the arrayList.
@@ -168,8 +170,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //accessing the MainActivity to update the places & locations in ArrayList's.
         MainActivity.places.add(address);
         MainActivity.locations.add(latLng);
+        //also updating the arrayAdapter to update our listView.
         MainActivity.arrayAdapter.notifyDataSetChanged();
 
-        Toast.makeText(this, "Location Saved!", Toast.LENGTH_SHORT).show();
+        //creating an sharedPreferences to store the arrayList data permanently.
+        //take a look in the "Shared preferences App".
+        SharedPreferences sharedPreferences = this.getSharedPreferences("com.vk.memorableplacesapp", Context.MODE_PRIVATE);
+
+        //have to store the lat and lng in two diff. arrayLists.
+        ArrayList<String> lat = new ArrayList<String>();
+        ArrayList<String> lng = new ArrayList<String>();
+        //storing lat & lnd into the arrayLists.
+        for(LatLng coord : MainActivity.locations) {
+            lat.add(Double.toString(coord.latitude));
+            lng.add(Double.toString(coord.longitude));
+        }
+        try {
+            //storing permanently the lat & lng.
+            sharedPreferences.edit().putString("lat", ObjectSerializer.serialize(lat)).apply();
+            sharedPreferences.edit().putString("lng", ObjectSerializer.serialize(lng)).apply();
+            //storing places.
+            sharedPreferences.edit().putString("places", ObjectSerializer.serialize(MainActivity.places)).apply();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(this, "Location Saved! \n"+address , Toast.LENGTH_SHORT).show();
     }
 }
